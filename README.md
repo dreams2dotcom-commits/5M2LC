@@ -6,5 +6,7 @@ Statisk sajt utan byggsteg. Netlify publicerar roten av repot automatiskt vid va
 
 - `index.html` – hela appen
 - `data.json` – terräng, liftar, pister och rutter för kartorna (OpenStreetMap, Mapzen Terrain)
+- `netlify/functions/notes.mjs` – API för de gemensamma listorna (Netlify Blobs)
+- `netlify/functions/photos.mjs` – API för det gemensamma bildalbumet (Netlify Blobs)
 - `sw.js`, `manifest.webmanifest`, `icons/` – installerbar app och offline-stöd
 - `house/` – bilder på huset (Alpinco / Varden Chalet)
