@@ -1,0 +1,851 @@
+<!doctype html>
+<html lang="sv">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="description" content="Reseguide för 5M2LC i Kvitfjell 3–10 januari 2027: huset, pistkarta, 3D-karta, restauranger och events.">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<style>
+:root{box-sizing:border-box}
+body{margin:0}
+img{max-width:100%}
+[hidden]{display:none!important}
+.top{padding-top:calc(10px + env(safe-area-inset-top,0px))!important}
+@media (display-mode:standalone){#instBtn{display:none}}
+</style>
+<title>5M2LC Kvitfjell 27</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="theme-color" content="#3b2f2a">
+<meta name="apple-mobile-web-app-title" content="5M2LC Kvitfjell 27">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=Figtree:wght@400;500;600;700&family=DM+Mono:wght@500&display=swap">
+</head>
+<body>
+<style>
+/* Layout: one-screen app. Compact header, a view area that scrolls (or holds a full-bleed map), and a tab bar — bottom on phones, inside the header on wide screens. */
+:root{
+  /* warm mountain-lodge palette: linen snow, timber, lingonberry, moss */
+  --snow:#f7f2ec; --paper:#fffcf8; --ink:#2c2622; --muted:#7a6c62; --line:#e8ddd1; --wash:#f1e8dd;
+  --timber:#3b2f2a; --timber-ink:#f7efe6;
+  --accent:#b23a48; --accent-ink:#ffffff; --fjord:#4a7a60; --lift:#d9822b;
+  --green:#2f8f58; --blue:#2f6fc4; --red:#cf3a4f; --black:#1d1a18;
+  --ok:#2f8f58; --warn:#b36a14;
+  --f-display:"Bricolage Grotesque","Trebuchet MS",system-ui,sans-serif;
+  --f-body:"Figtree",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-mono:"DM Mono",ui-monospace,Menlo,monospace;
+  --shadow:0 12px 30px #3b2f2a1f; --r:14px;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --snow:#191512; --paper:#221c18; --ink:#f2e9df; --muted:#b3a497; --line:#3a302a; --wash:#2b231e;
+  --timber:#120f0d; --timber-ink:#f2e9df;
+  --accent:#e2737f; --accent-ink:#2a0a0f; --fjord:#8cc4a3; --lift:#ec9a4a;
+  --green:#4cbf7d; --blue:#6ea4ef; --red:#ef6b7c; --black:#e3dcd5; --ok:#4cbf7d; --warn:#e3a33a;
+  --shadow:0 12px 30px #0009; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --snow:#191512; --paper:#221c18; --ink:#f2e9df; --muted:#b3a497; --line:#3a302a; --wash:#2b231e;
+  --timber:#120f0d; --timber-ink:#f2e9df;
+  --accent:#e2737f; --accent-ink:#2a0a0f; --fjord:#8cc4a3; --lift:#ec9a4a;
+  --green:#4cbf7d; --blue:#6ea4ef; --red:#ef6b7c; --black:#e3dcd5; --ok:#4cbf7d; --warn:#e3a33a;
+  --shadow:0 12px 30px #0009; color-scheme:dark}
+html,body{height:100%}
+body{background:var(--snow);color:var(--ink);font-family:var(--f-body);font-size:15px;line-height:1.5;overflow:hidden;-webkit-font-smoothing:antialiased}
+button{font:inherit;color:inherit}
+a{color:var(--fjord)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+#app{height:100%;display:grid;grid-template-rows:auto 1fr auto;grid-template-columns:minmax(0,1fr)}
+.inst .s{display:none}
+.cnt2{font-style:normal;display:none}
+@media (max-width:560px){.count{display:none}.cnt2{display:inline}}
+@media (max-width:560px){.brand b{font-size:18px}.count{font-size:11px;padding:4px 8px}.inst .l{display:none}.inst .s{display:inline}.inst{padding:6px 8px}}
+/* header */
+.top{background:var(--timber);color:var(--timber-ink);padding-block:10px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:flex;align-items:center;gap:12px;position:relative;z-index:20}
+.brand{display:grid;line-height:1;min-width:0}
+.brand b{font-family:var(--f-display);font-weight:800;font-size:21px;letter-spacing:-.01em}
+.brand b i{font-style:normal;color:#f0a3ad}
+.brand span{font-size:12px;opacity:.75;margin-top:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.count{margin-left:auto;font-family:var(--f-mono);font-size:12px;font-weight:600;padding:5px 9px;border-radius:999px;background:#ffffff1a;white-space:nowrap}
+.inst{border:1px solid #ffffff40;background:transparent;color:var(--timber-ink);border-radius:8px;padding:6px 10px;font-size:12.5px;font-weight:600;cursor:pointer;white-space:nowrap}
+.inst:hover{background:#ffffff14}
+
+/* tabs */
+.tabs{display:flex;background:var(--paper);border-top:1px solid var(--line);padding-bottom:calc(env(safe-area-inset-bottom,0px) + 14px);padding-left:env(safe-area-inset-left,0px);padding-right:env(safe-area-inset-right,0px);z-index:20}
+.tab{flex:1;display:grid;justify-items:center;gap:6px;padding:14px 2px 10px;border:0;background:none;cursor:pointer;color:var(--muted);font-size:11.5px;font-weight:600;letter-spacing:.01em}
+.tab svg{width:24px;height:24px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.tab[aria-selected="true"]{color:var(--accent)}
+@media (min-width:1180px){
+  #app{grid-template-rows:auto 1fr}
+  .tabs{grid-row:1;position:absolute;top:0;left:50%;transform:translateX(-50%);background:transparent;border:0;padding:6px 0;gap:4px;z-index:25}
+  .tab{color:#d9cabd}
+  .tab{flex:none;grid-auto-flow:column;gap:7px;padding:8px 12px;border-radius:8px;color:#d9cabd;font-size:13px}
+  .tab svg{width:18px;height:18px}
+  .tab:hover{background:#ffffff12}
+  .tab[aria-selected="true"]{background:#ffffff1f;color:#fff}
+}
+
+/* views */
+main{position:relative;min-height:0;overflow:hidden}
+.view{position:absolute;inset:0;overflow:auto;-webkit-overflow-scrolling:touch}
+.view.full{overflow:hidden}
+.wrap{max-width:1100px;margin:0 auto;padding-block:18px 40px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:grid;gap:22px}
+h1,h2,h3{font-family:var(--f-display);margin:0;text-wrap:balance;line-height:1.05}
+h1{font-weight:800;font-size:clamp(28px,6vw,44px);letter-spacing:-.005em}
+h2{font-weight:750;font-size:22px}
+h3{font-weight:700;font-size:17px}
+.eyebrow{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.muted{color:var(--muted)}
+.lede{font-size:16.5px;max-width:62ch;margin:0}
+
+/* ---------- HUSET ---------- */
+.hero{position:relative;border-radius:var(--r);overflow:hidden;background:var(--wash);aspect-ratio:16/9;max-width:100%}
+.hero img{width:100%;height:100%;object-fit:cover;display:block}
+.hero .cap{position:absolute;left:0;right:0;bottom:0;padding:48px 18px 16px;background:linear-gradient(transparent,#2a1d16cc);color:#fff;display:grid;gap:4px}
+.hero .cap h1{color:#fff}
+.hero .cap span{font-size:14px;opacity:.9}
+@media (max-width:600px){.hero{aspect-ratio:4/3}}
+.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(112px,1fr));gap:10px}
+.fact{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:10px 12px;display:grid;gap:2px}
+.fact b{font-family:var(--f-display);font-size:22px;font-weight:800;line-height:1}
+.fact span{font-size:12.5px;color:var(--muted)}
+.cols{display:grid;grid-template-columns:1.2fr 1fr;gap:22px;align-items:start}
+@media (max-width:820px){.cols{grid-template-columns:1fr}}
+.block{display:grid;gap:10px;min-width:0}
+.list{margin:0;padding:0;list-style:none;display:grid;gap:0;border-top:1px solid var(--line)}
+.list li{display:grid;grid-template-columns:auto 1fr;gap:4px 14px;padding:10px 0;border-bottom:1px solid var(--line)}
+.list li b{font-weight:600;min-width:94px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{font-size:12.5px;padding:4px 10px;border-radius:999px;background:var(--wash);color:var(--ink);border:1px solid transparent}
+.times{display:flex;gap:10px;flex-wrap:wrap}
+.time{flex:1;min-width:140px;background:var(--timber);color:var(--timber-ink);border-radius:10px;padding:12px 14px;display:grid;gap:2px}
+.time span{font-size:12px;opacity:.75}
+.time b{font-family:var(--f-mono);font-size:22px;font-weight:600}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .time{background:var(--wash);color:var(--ink)}}
+:root[data-theme="dark"] .time{background:var(--wash);color:var(--ink)}
+.addr{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.addr code{font-family:var(--f-mono);font-size:13px;background:var(--wash);padding:4px 8px;border-radius:6px;user-select:all}
+.btn{display:inline-flex;align-items:center;gap:6px;font-size:13.5px;font-weight:600;padding:8px 12px;border-radius:8px;border:1px solid var(--line);background:var(--paper);color:var(--ink);cursor:pointer;text-decoration:none}
+.btn:hover{border-color:var(--muted)}
+.btn.pri{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px}
+.gallery button{padding:0;border:0;border-radius:8px;overflow:hidden;cursor:pointer;aspect-ratio:3/2;background:var(--wash)}
+.gallery img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .3s}
+.gallery button:hover img{transform:scale(1.04)}
+.note{font-size:12.5px;color:var(--muted)}
+#lightbox{position:fixed;inset:0;z-index:100;background:#05080dee;display:grid;grid-template-rows:1fr auto;padding:env(safe-area-inset-top,0px) env(safe-area-inset-right,0px) env(safe-area-inset-bottom,0px) env(safe-area-inset-left,0px)}
+#lightbox figure{margin:0;display:grid;place-items:center;min-height:0;padding:12px;touch-action:pan-y}
+#lightbox img{max-width:100%;max-height:100%;object-fit:contain;border-radius:6px}
+#lightbox .lbbar{display:flex;align-items:center;gap:10px;padding:10px 16px 14px;color:#e8edf4}
+#lightbox .lbbar span{flex:1;font-size:14px}
+#lightbox .lbbar button{background:#ffffff1a;border:0;color:#fff;border-radius:8px;padding:8px 12px;cursor:pointer;font-weight:600}
+
+/* ---------- PISTKARTA ---------- */
+#pm{position:absolute;inset:0;background:var(--wash);touch-action:none;cursor:grab}
+#pm:active{cursor:grabbing}
+#pm svg{width:100%;height:100%;display:block}
+.pm-ui{position:absolute;z-index:5;display:flex;gap:6px;flex-wrap:wrap}
+.pm-ui.tl{top:12px;left:max(12px,env(safe-area-inset-left,0px));right:max(12px,env(safe-area-inset-right,0px))}
+.pm-ui.br{right:max(12px,env(safe-area-inset-right,0px));bottom:12px;flex-direction:column}
+.pill{background:var(--paper);border:1px solid var(--line);border-radius:999px;padding:7px 12px;font-size:12.5px;font-weight:600;box-shadow:var(--shadow);cursor:pointer;color:var(--ink);text-decoration:none;display:inline-flex;align-items:center;gap:6px}
+.pill[aria-pressed="true"]{background:var(--ink);color:var(--snow);border-color:var(--ink)}
+.zbtn{width:40px;height:40px;border-radius:10px;background:var(--paper);border:1px solid var(--line);box-shadow:var(--shadow);font-size:20px;font-weight:600;cursor:pointer;display:grid;place-items:center}
+.legend{position:absolute;left:max(12px,env(safe-area-inset-left,0px));bottom:12px;z-index:5;background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:8px 10px;display:flex;gap:4px 12px;flex-wrap:wrap;font-size:11.5px;color:var(--muted);max-width:calc(100% - 90px);box-shadow:var(--shadow)}
+.sw{display:inline-block;width:14px;height:4px;border-radius:2px;margin-right:5px;vertical-align:middle}
+#pmInfo{position:absolute;z-index:6;left:50%;transform:translateX(-50%);bottom:64px;background:var(--ink);color:var(--snow);padding:9px 14px;border-radius:10px;font-size:13.5px;box-shadow:var(--shadow);max-width:calc(100% - 32px);text-align:center}
+#pmInfo b{font-weight:700}
+#pm text{font-family:var(--f-body);paint-order:stroke;stroke:#ffffffdd;stroke-linejoin:round;pointer-events:none}
+#pm text.lift{fill:#8a3a0a;font-weight:700}
+#pm text.pst{fill:#2c2622;font-weight:600}
+#pm text.area{font-family:var(--f-display);font-weight:800;fill:#2c2622;letter-spacing:.08em;stroke:#ffffffaa}
+
+/* ---------- 3D ---------- */
+#scene{position:absolute;inset:0;background:linear-gradient(#dfe5e6,#f6efe7)}
+#scene canvas{display:block;width:100%;height:100%;touch-action:none}
+#labels{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.lbl{position:absolute;left:0;top:0;white-space:nowrap;will-change:transform}
+.lbl.area{font-family:var(--f-display);font-weight:800;font-size:clamp(20px,3vw,36px);letter-spacing:.08em;color:#fff;text-shadow:0 2px 10px #0b1d2a99,0 0 2px #0b1d2a}
+.lbl.poi,.lbl.lift,.lbl.leg,.lbl.food{font-size:11.5px;font-weight:600;padding:3px 7px;border-radius:4px;background:#ffffffe6;color:#2c2622;box-shadow:0 1px 4px #0003}
+.lbl.lift{background:#fff3ea;color:#8a3a0a;border:1px solid #f2b98f}
+.lbl.food{background:#fff;color:#2c2622;border:1px solid #b23a4855}
+.lbl.leg{background:#3b2f2a;color:#fff}
+.lbl.home{font-family:var(--f-display);font-weight:800;font-size:16px;padding:5px 10px 4px;border-radius:5px;background:#b23a48;color:#fff;box-shadow:0 4px 14px #0004}
+.lbl.home small{display:block;font-family:var(--f-body);font-weight:500;font-size:10.5px;opacity:.9}
+#panel{position:absolute;z-index:5;top:12px;left:max(12px,env(safe-area-inset-left,0px));bottom:12px;width:min(360px,calc(100% - 24px));display:flex;flex-direction:column;background:color-mix(in srgb,var(--paper) 94%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow);overflow:hidden}
+#panel .ph{padding:12px 14px 10px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:10px}
+#panel .ph h2{font-size:19px;flex:1}
+#panel .ps{overflow:auto;flex:1;min-height:0;padding:10px;display:grid;gap:12px;align-content:start}
+.grp{display:grid;gap:4px}
+.grp h3{margin:2px 6px;font-size:13px;letter-spacing:.06em;text-transform:uppercase}
+.route{all:unset;box-sizing:border-box;cursor:pointer;display:grid;grid-template-columns:1fr auto;gap:2px 10px;padding:9px 10px;border-radius:8px;border:1px solid transparent}
+.route:hover{background:var(--wash)}
+.route:focus-visible{outline:2px solid var(--accent)}
+.route[aria-pressed="true"]{background:var(--wash);border-color:var(--accent)}
+.route .t{font-weight:600;font-size:14px}
+.route .m{font-family:var(--f-mono);font-size:12.5px}
+.route .s{grid-column:1/-1;font-size:12.5px;color:var(--muted);line-height:1.4}
+.route .bar{grid-column:1/-1;display:flex;height:5px;border-radius:3px;overflow:hidden;margin-top:5px;gap:2px}
+.bar i{display:block;height:100%}
+.steps{grid-column:1/-1;margin:8px 0 2px;padding:0;list-style:none;display:grid;gap:6px;counter-reset:s}
+.steps li{display:grid;grid-template-columns:20px 1fr;gap:8px;font-size:12.5px;line-height:1.35;counter-increment:s}
+.steps li::before{content:counter(s);font-family:var(--f-mono);font-size:11px;width:20px;height:20px;border-radius:50%;display:grid;place-items:center;background:var(--ink);color:var(--snow)}
+.steps .nm{font-weight:600}
+.steps .dt{color:var(--muted);font-family:var(--f-mono);font-size:11px}
+.dot{display:inline-block;width:9px;height:9px;border-radius:2px;margin-right:5px}
+.d-green{background:var(--green)}.d-blue{background:var(--blue)}.d-red{background:var(--red)}.d-black{background:var(--black)}.d-lift{background:var(--lift);border-radius:50%}.d-walk{background:repeating-linear-gradient(90deg,var(--muted) 0 3px,transparent 3px 5px)}
+.play{grid-column:1/-1;justify-self:start;margin-top:6px}
+#tools3d{position:absolute;z-index:4;top:12px;right:max(12px,env(safe-area-inset-right,0px));display:flex;flex-direction:column;align-items:flex-end;gap:6px}
+.tbar{display:flex;gap:3px;padding:3px;background:var(--paper);border:1px solid var(--line);border-radius:9px;box-shadow:var(--shadow);flex-wrap:wrap;justify-content:flex-end}
+.tbar button{border:0;background:none;padding:7px 9px;border-radius:6px;font-size:12.5px;font-weight:600;cursor:pointer}
+.tbar button[aria-pressed="true"]{background:var(--ink);color:var(--snow)}
+#loading3d{position:absolute;inset:0;display:grid;place-items:center;z-index:10;background:var(--snow);font-family:var(--f-display);font-weight:800;font-size:22px;color:var(--muted)}
+#sheetToggle{display:none}
+@media (max-width:720px){
+  #panel{top:auto;left:0;right:0;bottom:0;width:auto;max-height:55%;border-radius:14px 14px 0 0;border-left:0;border-right:0;border-bottom:0}
+  #panel.collapsed .ps{display:none}
+  #panel .ph{padding-left:max(14px,env(safe-area-inset-left,0px));padding-right:max(14px,env(safe-area-inset-right,0px))}
+  #sheetToggle{display:inline-flex}
+}
+
+/* ---------- RESTAURANGER ---------- */
+.filters{display:flex;gap:6px;flex-wrap:wrap}
+.fbtn{border:1px solid var(--line);background:var(--paper);border-radius:999px;padding:6px 12px;font-size:13px;font-weight:600;cursor:pointer}
+.fbtn[aria-pressed="true"]{background:var(--ink);color:var(--snow);border-color:var(--ink)}
+.rgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px}
+.rcard{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:14px 16px;display:grid;gap:8px;align-content:start;min-width:0}
+.rcard header{display:flex;gap:10px;align-items:baseline;justify-content:space-between}
+.rcard h3{font-size:18px}
+.rcard .dist{font-family:var(--f-mono);font-size:12px;color:var(--muted);white-space:nowrap}
+.rcard p{margin:0;font-size:14px}
+.tags{display:flex;gap:5px;flex-wrap:wrap}
+.tag{font-size:11.5px;font-weight:600;padding:2px 8px;border-radius:5px;background:var(--wash);color:var(--ink)}
+.tag.lunch{background:color-mix(in srgb,var(--fjord) 16%,transparent)}
+.tag.middag{background:color-mix(in srgb,var(--accent) 16%,transparent)}
+.tag.afterski{background:color-mix(in srgb,var(--lift) 20%,transparent)}
+.tag.side{background:transparent;border:1px solid var(--line);color:var(--muted)}
+.rcard .hrs{font-family:var(--f-mono);font-size:12.5px;color:var(--ink);background:var(--wash);border-radius:6px;padding:6px 8px}
+.rcard .links{display:flex;gap:6px;flex-wrap:wrap}
+.rcard .links .btn{font-size:12.5px;padding:6px 10px}
+.phone{font-family:var(--f-mono);font-size:12.5px;user-select:all}
+
+/* ---------- EVENTS ---------- */
+.days{display:flex;gap:6px;overflow-x:auto;padding-bottom:4px;scrollbar-width:thin}
+.day{flex:none;border:1px solid var(--line);background:var(--paper);border-radius:10px;padding:8px 12px;cursor:pointer;display:grid;justify-items:center;gap:0;min-width:60px}
+.day span{font-size:11.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;font-weight:600}
+.day b{font-family:var(--f-display);font-size:22px;font-weight:800;line-height:1.1}
+.day[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.day[aria-pressed="true"] span{color:inherit;opacity:.85}
+.day.today b::after{content:"";display:block;width:6px;height:6px;border-radius:50%;background:currentColor;margin:2px auto 0}
+.daysum{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.daysum .chip{font-family:var(--f-mono)}
+.agenda{display:grid;gap:0;border-top:1px solid var(--line)}
+.ev{display:grid;grid-template-columns:96px 1fr;gap:4px 14px;padding:12px 0;border-bottom:1px solid var(--line)}
+.ev time{font-family:var(--f-mono);font-size:13px;font-weight:600;padding-top:2px}
+.ev .body{display:grid;gap:3px;min-width:0}
+.ev .body b{font-size:15px}
+.ev .body small{color:var(--muted);font-size:13px}
+.ev .cat{justify-self:start;font-size:11px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;padding:2px 7px;border-radius:4px}
+.cat-lift{background:color-mix(in srgb,var(--lift) 20%,transparent)}
+.cat-afterski{background:color-mix(in srgb,var(--accent) 16%,transparent)}
+.cat-skiskola{background:color-mix(in srgb,var(--fjord) 16%,transparent)}
+.cat-event{background:color-mix(in srgb,var(--green) 18%,transparent)}
+.cat-mat{background:var(--wash)}
+@media (max-width:520px){.ev{grid-template-columns:78px 1fr}}
+.callout{background:var(--paper);border:1px solid var(--line);border-left:4px solid var(--warn);border-radius:8px;padding:10px 14px;font-size:13.5px}
+
+/* install sheet */
+#install{position:fixed;inset:0;z-index:90;background:#05080d99;display:grid;align-items:end;justify-items:center}
+#install .sheet{background:var(--paper);color:var(--ink);width:min(560px,100%);border-radius:16px 16px 0 0;padding:20px max(20px,env(safe-area-inset-right,0px)) calc(20px + env(safe-area-inset-bottom,0px)) max(20px,env(safe-area-inset-left,0px));display:grid;gap:14px;max-height:90%;overflow:auto}
+@media (min-width:700px){#install{align-items:center}#install .sheet{border-radius:16px}}
+.how{display:grid;gap:10px;grid-template-columns:1fr 1fr}
+@media (max-width:520px){.how{grid-template-columns:1fr}}
+.how div{background:var(--wash);border-radius:10px;padding:12px 14px}
+.how ol{margin:6px 0 0;padding-left:20px;font-size:14px;display:grid;gap:4px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+
+<div id="app">
+  <header class="top">
+    <div class="brand"><b><i>5M2LC</i> Kvitfjell 27</b><span>3–10 jan 2027 · <em class="cnt2" id="count2"></em>Varden Chalet 21</span></div>
+    <span class="count" id="count"></span>
+    <button class="inst" id="instBtn" type="button"><span class="l">Lägg till på hemskärmen</span><span class="s">Installera</span></button>
+  </header>
+
+  <main>
+    <!-- HUSET -->
+    <section class="view" id="v-huset" data-view="huset" aria-label="Huset">
+      <div class="wrap">
+        <figure class="hero" style="margin:0">
+          <img src="house/h11.jpg" alt="Matplatsen med braskamin och utsikt över dalen" fetchpriority="high">
+          <figcaption class="cap"><span class="eyebrow" style="color:#ffffffcc">Varden · Kvitfjell Vest</span><h1>Varden Chalet 21</h1><span>Två plan, ski in/ski out, bastu och braskamin. Vi bor här 3–10 januari.</span></figcaption>
+        </figure>
+
+        <div class="facts">
+          <div class="fact"><b>10</b><span>bäddar</span></div>
+          <div class="fact"><b>4</b><span>sovrum</span></div>
+          <div class="fact"><b>124 m²</b><span>två plan</span></div>
+          <div class="fact"><b>2</b><span>badrum</span></div>
+          <div class="fact"><b>Bastu</b><span>+ badkar</span></div>
+          <div class="fact"><b>837</b><span>möh, ski in/out</span></div>
+        </div>
+
+        <div class="times">
+          <div class="time"><span>Incheckning sön 3 jan</span><b>från 17:00</b></div>
+          <div class="time"><span>Utcheckning sön 10 jan</span><b>senast 11:00</b></div>
+        </div>
+
+        <div class="cols">
+          <div class="block">
+            <h2>Rummen</h2>
+            <ul class="list">
+              <li><b>Sovrum 1</b><span>Dubbelsäng 160 × 200</span></li>
+              <li><b>Sovrum 2</b><span>Dubbelsäng 160 × 200</span></li>
+              <li><b>Sovrum 3</b><span>Våningssäng 140 / 90 × 200</span></li>
+              <li><b>Sovrum 4</b><span>Våningssäng 140 / 90 × 200</span></li>
+              <li><b>Badrum 1</b><span>Dusch, badkar, handfat, toalett och bastu</span></li>
+              <li><b>Badrum 2</b><span>Dusch, handfat och toalett</span></li>
+              <li><b>Kök</b><span>Spis, kyl, frys, diskmaskin, kaffebryggare och mikro. Matplats för 10.</span></li>
+              <li><b>Vardagsrum</b><span>Soffa, TV och braskamin</span></li>
+            </ul>
+          </div>
+          <div class="block">
+            <h2>Bra att veta</h2>
+            <div class="chips">
+              <span class="chip">Wi-Fi</span><span class="chip">Braskamin</span><span class="chip">Terrass</span><span class="chip">Skidskåp</span><span class="chip">Tvättmaskin</span><span class="chip">Torktumlare</span><span class="chip">Parkering utomhus</span><span class="chip">Elbilsladdning (mot avgift)</span><span class="chip">Rökfritt</span><span class="chip">Inga husdjur</span>
+            </div>
+            <div class="addr"><code id="addrTxt">Varden 35, 2634 Fåvang, Norge</code><button class="btn" type="button" id="copyAddr">Kopiera adress</button><a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&amp;query=61.442361,10.091750">Öppna i Kartor</a></div>
+            <p class="note" id="skiNote"></p>
+            <h2 style="margin-top:8px">Praktiskt</h2>
+            <ul class="list">
+              <li><b>Skidhyra</b><span>Sport 1 Skitorget, <span class="phone">+47 911 18 177</span>. Kan leverera till stugans skidskåp. <a href="https://www.alpinco.com/no/kvitfjell/skiutleie" target="_blank" rel="noopener">Boka senast två dagar innan</a>.</span></li>
+              <li><b>Handla</b><span>Storhandla i Fåvang (Kiwi och Extra, ca 20 min). Uppe på berget finns Børson vid Østsiden och en liten deli vid Skitorget. Se fliken Mat.</span></li>
+              <li><b>Nödnummer</b><span>113 ambulans · 112 polis · 110 brand · 116 117 jourläkare</span></li>
+              <li><b>Taxi</b><span>Schøss Taxi, dygnet runt: <span class="phone">+47 48 90 95 00</span></span></li>
+            </ul>
+            <p class="note">Uthyrare: Alpinco Kvitfjell, tel <span class="phone">+47 61 24 90 00</span>. <a href="https://www.alpinco.com/da/stays/village/2647555/varden-chalet-21/2766371" target="_blank" rel="noopener">Bokningssidan</a>.</p>
+          </div>
+        </div>
+
+        <div class="block">
+          <h2>Bilder <span class="muted" style="font-size:15px;font-weight:600">22 st</span></h2>
+          <div class="gallery" id="gallery"></div>
+          <p class="note">Bilder: Alpinco / Varden Chalet.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- PISTKARTA -->
+    <section class="view full" id="v-pistkarta" data-view="pistkarta" aria-label="Pistkarta" hidden>
+      <div id="pm" aria-label="Pistkarta över Kvitfjell, dra för att flytta och nyp för att zooma"></div>
+      <div class="pm-ui tl">
+        <a class="pill" id="pmOfficial" target="_blank" rel="noopener" href="https://www.nordresor.se/media/278" style="background:var(--accent);border-color:var(--accent);color:var(--accent-ink)">Kvitfjells pistkarta ↗</a>
+        <button class="pill" id="pmHome" type="button">Visa huset</button>
+        <button class="pill" id="pmAll" type="button">Hela Kvitfjell</button>
+        <button class="pill" id="pmFood" type="button" aria-pressed="true">Restauranger</button>
+        <button class="pill" id="pmNames" type="button" aria-pressed="true">Namn</button>
+      </div>
+      <div class="pm-ui br"><button class="zbtn" id="zin" type="button" aria-label="Zooma in">+</button><button class="zbtn" id="zout" type="button" aria-label="Zooma ut">−</button></div>
+      <div class="legend"><span><i class="sw" style="background:var(--green)"></i>Grön</span><span><i class="sw" style="background:var(--blue)"></i>Blå</span><span><i class="sw" style="background:var(--red)"></i>Röd</span><span><i class="sw" style="background:var(--black)"></i>Svart</span><span><i class="sw" style="background:var(--lift)"></i>Lift</span></div>
+      <div id="pmInfo" hidden></div>
+    </section>
+
+    <!-- 3D -->
+    <section class="view full" id="v-3d" data-view="3d" aria-label="3D-karta" hidden>
+      <div id="scene" aria-label="3D-karta över Kvitfjell"></div>
+      <div id="labels"></div>
+      <div id="loading3d">Laddar terräng…</div>
+      <aside id="panel">
+        <div class="ph"><h2>Ut i backen &amp; hem</h2><button class="btn" id="sheetToggle" type="button" aria-expanded="true">Dölj</button></div>
+        <div class="ps">
+          <p class="note" style="margin:0 6px" id="routeIntro"></p>
+          <div class="grp" id="g-ut"><h3>Ut från huset</h3></div>
+          <div class="grp" id="g-hem"><h3>Hem igen</h3></div>
+          <p class="note" style="margin:0 6px">Tider är uppskattningar med ca 1,5 min kö per lift. Rutterna följer gröna och blå backar där det går. Data: <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">© OpenStreetMap</a> · höjd: Mapzen Terrain · flygbild: Esri, Maxar.</p>
+        </div>
+      </aside>
+      <div id="tools3d">
+        <div class="tbar"><button type="button" id="bWinter" aria-pressed="true">Vinter</button><button type="button" id="bPhoto" aria-pressed="false">Flygbild</button><button type="button" id="bHome3">Huset</button><button type="button" id="bAll3">Översikt</button></div>
+      </div>
+    </section>
+
+    <!-- RESTAURANGER -->
+    <section class="view" id="v-mat" data-view="mat" aria-label="Restauranger" hidden>
+      <div class="wrap">
+        <div class="block"><span class="eyebrow">Lunch, middag och afterski</span><h1>Restauranger</h1><p class="lede" id="matLede"></p></div>
+        <div class="filters" id="matFilters"></div>
+        <div class="rgrid" id="rgrid"></div>
+        <p class="note" id="matSrc"></p>
+      </div>
+    </section>
+
+    <!-- EVENTS -->
+    <section class="view" id="v-events" data-view="events" aria-label="Events" hidden>
+      <div class="wrap">
+        <div class="block"><span class="eyebrow">Söndag 3 – söndag 10 januari 2027</span><h1>Events &amp; tider</h1><p class="lede" id="evLede"></p></div>
+        <div class="days" id="days" role="group" aria-label="Välj dag"></div>
+        <div class="daysum" id="daysum"></div>
+        <div class="filters" id="evFilters"></div>
+        <div class="agenda" id="agenda"></div>
+        <div class="callout" id="evNote"></div>
+        <p class="note" id="evSrc"></p>
+      </div>
+    </section>
+  </main>
+
+  <nav class="tabs" role="tablist" aria-label="Sektioner">
+    <button class="tab" role="tab" data-go="huset" aria-selected="true"><svg viewBox="0 0 24 24"><path d="M3 11.5 12 4l9 7.5"/><path d="M5.5 10v9.5h13V10"/><path d="M10 19.5v-5h4v5"/></svg>Huset</button>
+    <button class="tab" role="tab" data-go="pistkarta" aria-selected="false"><svg viewBox="0 0 24 24"><path d="M3 6.5 9 4l6 2.5L21 4v13.5L15 20l-6-2.5L3 20z"/><path d="M9 4v13.5M15 6.5V20"/></svg>Pistkarta</button>
+    <button class="tab" role="tab" data-go="3d" aria-selected="false"><svg viewBox="0 0 24 24"><path d="m2.5 19 6.5-11 4 6 3-4 5.5 9z"/><path d="m7.2 10.3 1.8 1.2 1.6-1.1"/></svg>3D</button>
+    <button class="tab" role="tab" data-go="mat" aria-selected="false"><svg viewBox="0 0 24 24"><path d="M7 3v8M4.5 3v5a2.5 2.5 0 0 0 5 0V3M7 11v10"/><path d="M17 21V3c-2.2 1.3-3.3 3.8-3.3 7.2V13H17"/></svg>Mat</button>
+    <button class="tab" role="tab" data-go="events" aria-selected="false"><svg viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="15.5" rx="2"/><path d="M3.5 10h17M8 3v4M16 3v4"/><path d="M8 14h3"/></svg>Events</button>
+  </nav>
+</div>
+
+<div id="lightbox" hidden role="dialog" aria-modal="true" aria-label="Bildvisning">
+  <figure><img id="lbImg" alt=""></figure>
+  <div class="lbbar"><button type="button" id="lbPrev" aria-label="Föregående">←</button><span id="lbCap"></span><button type="button" id="lbNext" aria-label="Nästa">→</button><button type="button" id="lbClose">Stäng</button></div>
+</div>
+
+<div id="install" hidden role="dialog" aria-modal="true" aria-labelledby="instTitle">
+  <div class="sheet">
+    <h2 id="instTitle">Ha guiden som en app i mobilen</h2>
+    <p style="margin:0">Öppna länken du fått i mobilens vanliga webbläsare, alltså Safari på iPhone eller Chrome på Android. Om länken öppnas inne i Messenger, Instagram eller liknande: välj först "Öppna i webbläsare".</p>
+    <div class="how">
+      <div><b>iPhone (Safari)</b><ol><li>Tryck på dela-knappen (rutan med pilen uppåt).</li><li>Scrolla och välj <b>Lägg till på hemskärmen</b>.</li><li>Döp den till "Kvitfjell" och tryck <b>Lägg till</b>.</li></ol></div>
+      <div><b>Android (Chrome)</b><ol><li>Tryck på menyn ⋮ uppe till höger.</li><li>Välj <b>Lägg till på startskärmen</b> (ibland "Installera app").</li><li>Bekräfta med <b>Lägg till</b>.</li></ol></div>
+    </div>
+    <p class="note" style="margin:0">Då får du en egen ikon på hemskärmen. Guiden öppnas som en app, fungerar även utan täckning när du väl har öppnat den en gång, och uppdateras automatiskt när du har nät.</p>
+    <button class="btn pri" type="button" id="instClose" style="justify-self:start">Klart</button>
+  </div>
+</div>
+
+<script>
+/* ================= DATA ================= */
+const TRIP={start:'2027-01-03',end:'2027-01-10'};
+const HOUSE_LL=[61.442361,10.091750];
+const PHOTOS=[
+ ['h11','Matplats för tio vid braskaminen'],['h02','Vardagsrum och matplats på övervåningen'],['h03','Huset från utsidan'],['h01','Varden Chalet-byn en vinterkväll'],
+ ['h15','Allrummet'],['h09','Köket'],['h06','Köksbänken'],['h16','Frukost i köket'],['h05','Braskaminen'],['h12','Sovrum med dubbelsäng'],
+ ['h08','Sovrum med utsikt'],['h13','Badrum med badkar'],['h20','Bastun'],['h21','Badrum 2'],['h07','Duschen'],['h04','Detalj i badrummet'],
+ ['h17','Entré med skidkläder'],['h18','Ut till backen'],['h19','Ski in/ski out-entrén'],['h14','Utsikt mot backarna'],['h10','Varden ovanifrån'],['h22','Varden en sommardag']
+];
+const RESTAURANTS=[
+ {name:'Varden Restaurant',kind:['lunch','middag','cafe','afterski'],side:'Varden',skiin:true,show3d:true,ll:[61.43476,10.09184],
+  desc:'Närmast huset, vid toppen av Vesleseter Express. Hemlagad mat och eget bakverk, med utsikt mot Rondane och Jotunheimen. Afterski på helgerna.',
+  hours:'Frukost 10–12 · brunch 10–16 · lunch 12–16 · middag fre–lör 17:30–20',book:'Boka bord till middagen fre 8 eller lör 9 jan.',
+  url:'https://www.vardenrestaurant.com',menu:'https://book.easytablebooking.com/book/?id=c6e6b&lang=auto',phone:'+47 463 69 576'},
+ {name:'Gondolen Fjellbistro',kind:['lunch','cafe','afterski'],side:'Vestsiden',skiin:true,show3d:true,ll:[61.4502,10.10779],
+  desc:'Mitt på Skitorget där gondolen från Varden kommer fram. Burgare, pasta, lunch lagad från grunden, baristakaffe och bakverk. Kiosk på terrassen med soppa och grill.',
+  hours:'Öppettider för januari är inte publicerade',url:'http://fjellbistro.no',phone:'+47 482 23 377'},
+ {name:'Selet Pizzeria',kind:['lunch','middag'],side:'Vestsiden',skiin:true,show3d:true,ll:[61.45275,10.10839],
+  desc:'Stenugnspizza med 70 platser i Tyrihanstunet. Vecka 1 är den bara öppen på helgerna.',
+  hours:'Sön 3 jan 12–15:30 · mån–tor stängt · fre 8 & lör 9 jan 12–20 · sön 10 jan 12–15:30',book:'Bordsbokning via hemsidan eller booking@tyrihanstunet.no',
+  url:'https://www.tyrihanstunet.no/apningstider/',phone:'+47 97 56 99 28'},
+ {name:'Tyrihans Skicafé',kind:['lunch','cafe'],side:'Vestsiden',skiin:true,ll:[61.45274,10.10864],
+  desc:'Enkel lunch i backen: club sandwich och tomatsoppa.',
+  hours:'Tider efter 2 jan är inte publicerade. I december höll caféet öppet ca 11–15 på vardagar.',url:'https://www.tyrihanstunet.no/apningstider/',phone:'+47 97 56 99 28'},
+ {name:'Fjøset Afterski',kind:['afterski'],side:'Vestsiden',skiin:true,show3d:true,ll:[61.45261,10.10854],
+  desc:'Den stora afterskin på Vestsiden, med DJ, livemusik och stor bar.',
+  hours:'Fre 8 & lör 9 jan 12–20 · stängt sön–tor',url:'https://www.tyrihanstunet.no/apningstider/',phone:'+47 97 56 99 28'},
+ {name:'Låven Raclette',kind:['lunch','middag'],side:'Vestsiden',skiin:true,ll:[61.45282,10.10852],
+  desc:'Schweizisk raclette i Tyrihanstunet. Under er vecka bara öppet på lördagen.',
+  hours:'Lör 9 jan 12–16',book:'Boka i förväg.',url:'https://www.tyrihanstunet.no/apningstider/',phone:'+47 97 56 99 28'},
+ {name:'Lettvint Café & Bar',kind:['lunch','middag','afterski'],side:'Vestsiden',skiin:true,ll:[61.44889,10.12318],
+  desc:'Vid Oleheisen, intill backe 28. Pizza, burgare, soppa och sallad, och dessutom shuffleboard, dart och spel. Mest liv på helgerna. Läget på kartan är ungefärligt.',
+  hours:'Kök till 20 · bar till 22 (veckodagar är inte angivna)',url:'https://lettvint-bar.no',menu:'https://book.easytable.com/book/?id=70525&lang=auto',phone:'+47 968 43 300'},
+ {name:'Koia',kind:['lunch','afterski'],side:'Østsiden',skiin:true,show3d:true,ll:[61.46985,10.13643],
+  desc:'Timmerstuga vid Mellomstasjonen som säger sig ha Norges trevligaste afterski. Kända för sin chokladkaka och gourmetkorv.',
+  hours:'Dagligen 12–18 · fredag till 22',book:'Bordsbokning på koia.no',url:'https://www.koia.no',phone:'+47 917 32 345'},
+ {name:'Gudbrandsgard Hotel',kind:['middag','afterski'],side:'Østsiden',skiin:true,ll:[61.47043,10.1374],
+  desc:'Hotellet vid Mellomstasjonen. Gildestua har middagsbuffé, Lobbybaren har enklare mat och Skibaren är öppen på kvällen. Läget på kartan är ungefärligt.',
+  hours:'Middagsbuffé 18–20 · Lobbybaren 07–02',book:'Bordsbokning krävs, med kortgaranti. Avboka senast kl 15 samma dag, annars kostar det 600 NOK/person.',
+  url:'https://gudbrandsgard.no/servering/',phone:'+47 61 28 48 00'},
+ {name:'Restaurant Mett',kind:['lunch','afterski'],side:'Østsiden',skiin:true,ll:[61.47052,10.13683],
+  desc:'Pizza och lunch dagtid, och brasbar på fredags- och lördagskvällar. Prisvärt.',
+  hours:'Öppettider för januari är inte publicerade',url:'https://www.alpinco.com/en/kvitfjell/restaurant-mett',phone:'+47 488 55 304'},
+ {name:'Kvitfjell Food House',kind:['lunch','middag'],side:'Østsiden',skiin:true,ll:[61.47259,10.13311],
+  desc:'Ovanför matbutiken Børson, nedanför backe 9. Enkel lunch, färdigrätter att ta med hem och kvällsöppet vissa helger.',
+  hours:'Öppettider är inte publicerade',url:'https://www.alpinco.com/en/kvitfjell/kvitfjell-food-house'},
+ {name:'Vestsiden Deli',kind:['handla'],side:'Vestsiden',ll:[61.45027,10.10614],
+  desc:'Liten matbutik vid Skitorget enligt kartdata. Öppettiderna har vi inte kunnat bekräfta, så storhandla på vägen upp.',hours:'Öppettider: okända'},
+ {name:'Børson Dagligvare',kind:['handla'],side:'Østsiden',ll:[61.47247,10.13317],
+  desc:'Matbutik vid Mellomstasjonen, nedanför backe 9. Öppen hela vintern, även på kvällen.',hours:'Exakta tider är inte publicerade'},
+ {name:'Kiwi & Extra Fåvang',kind:['handla'],side:'Fåvang',
+  desc:'Fullstora matbutiker i Fåvang, ca 20 minuter med bil. Bra för storhandling när ni kommer söndag den 3:e.'},
+ {name:'Vinmonopolet Ringebu',kind:['handla'],side:'Ringebu',
+  desc:'Statens butik för vin och sprit. Starköl finns också bara här. Hanstadgata 3, Ringebu.',
+  hours:'Mån–tor 11–17 · fre 10–18 · lör 10–16 · sön stängt',url:'https://www.vinmonopolet.no/butikk/380'}
+];
+const R=(d0,d1)=>{const o=[];for(let d=d0;d<=d1;d++)o.push('2027-01-'+String(d).padStart(2,'0'));return o;};
+const EVENTS=[
+ {cat:'event',title:'Incheckning i Varden Chalet 21',time:'från 17:00',t:'17:00',dates:['2027-01-03'],where:'Nyckel och info från Alpinco',note:'Storhandla i Fåvang på vägen upp.'},
+ {cat:'event',title:'Utcheckning',time:'senast 11:00',t:'11:00',dates:['2027-01-10']},
+ {cat:'lift',title:'Liftarna öppna',time:'09:30–15:30',t:'09:30',from:'2027-01-03',to:'2027-01-10',where:'Varden, Vestsiden och Østsiden',note:'Samma tider i alla områden hela perioden 27 nov–28 jan.'},
+ {cat:'lift',title:'Kvällsåkning (preliminärt)',time:'15:30–20:00',t:'15:31',dates:['2027-01-07','2027-01-08'],where:'Vestsidens barnområde: Barnetrekket, Jøkultunnelen och Tunnelheisen',note:'Förra säsongen var det kvällsåkning tis, tor och fre från 6 januari. Det är inte bekräftat för 2027. Ingår i dagskortet.'},
+ {cat:'skiskola',title:'Skidskolans disk öppen',time:'09:00–16:00',t:'09:00',from:'2027-01-03',to:'2027-01-10',where:'Skitorget, Vestsiden',note:'Öppen till 30 minuter efter att liftarna stängt.',url:'https://www.alpinco.com/en/kvitfjell/ski-school'},
+ {cat:'skiskola',title:'Barnkurs i grupp, 4 dagar mån–tor',time:'tid ej satt',t:'10:00',dates:R(4,7),where:'Samling vid lift I, KIDS Skitorget',note:'4–5 år: 60 min/dag, 1 900 NOK. 6 år och äldre: 90 min/dag, 2 300 NOK. Första dagen är obligatorisk. Vecka 1 och starttider var inte publicerade 24 nov, så kolla och boka i tid.',url:'https://kvitfjell.skischool.shop'},
+ {cat:'skiskola',title:'Privatlektion',time:'bokas',t:'10:01',from:'2027-01-04',to:'2027-01-09',where:'skiskole@kvitfjell.no',note:'60 min 1 200 NOK (+385 per extra person), 90 min 1 700 NOK. Max 5 per lärare. Svensktalande lärare finns.',url:'https://kvitfjell.skischool.shop/privat/'},
+ {cat:'event',title:'Jøkul i barnområdena',time:'under dagen',t:'11:00',from:'2027-01-03',to:'2027-01-10',where:'KIDS Skitorget och KIDS Gudbrandsgard',note:'Kvitfjells maskot dyker upp i backen. Nytt för i år är Jøkuls World Cup med ministörtlopp, skogsbana och parallellslalom i Varden.'},
+ {cat:'event',title:'Hundspann eller isbad',time:'bokas',t:'12:30',from:'2027-01-04',to:'2027-01-09',where:'Skotten Seter / Værfast',note:'Bokas via Alpinco. Transport finns för den som saknar bil.',url:'https://www.alpinco.com/no/kvitfjell/vinteraktiviteter'},
+ {cat:'mat',title:'Lunch på Varden Restaurant',time:'12:00–16:00',t:'12:00',from:'2027-01-03',to:'2027-01-10',where:'Toppen av Vesleseter Express, närmast huset'},
+ {cat:'mat',title:'Selet Pizzeria',time:'12:00–15:30',t:'12:01',dates:['2027-01-03','2027-01-10'],where:'Tyrihanstunet, Vestsiden'},
+ {cat:'mat',title:'Selet Pizzeria',time:'12:00–20:00',t:'12:01',dates:['2027-01-08','2027-01-09'],where:'Tyrihanstunet, Vestsiden'},
+ {cat:'mat',title:'Låven Raclette',time:'12:00–16:00',t:'12:02',dates:['2027-01-09'],where:'Tyrihanstunet, Vestsiden',note:'Boka i förväg.'},
+ {cat:'mat',title:'Middag på Varden Restaurant',time:'17:30–20:00',t:'17:30',dates:['2027-01-08','2027-01-09'],where:'Varden, närmast huset',note:'Boka bord.',url:'https://book.easytablebooking.com/book/?id=c6e6b&lang=auto'},
+ {cat:'mat',title:'Middagsbuffé i Gildestua',time:'18:00–20:00',t:'18:00',from:'2027-01-03',to:'2027-01-09',where:'Gudbrandsgard Hotel, Østsiden',note:'Bordsbokning krävs.'},
+ {cat:'mat',title:'Vinmonopolet Ringebu',time:'11:00–17:00',t:'11:01',dates:R(4,7),where:'Hanstadgata 3, Ringebu'},
+ {cat:'mat',title:'Vinmonopolet Ringebu',time:'10:00–18:00',t:'10:02',dates:['2027-01-08'],where:'Hanstadgata 3, Ringebu'},
+ {cat:'mat',title:'Vinmonopolet Ringebu',time:'10:00–16:00',t:'10:02',dates:['2027-01-09'],where:'Hanstadgata 3, Ringebu',note:'Stängt söndag.'},
+ {cat:'afterski',title:'Koia afterski',time:'12:00–18:00',t:'15:30',from:'2027-01-03',to:'2027-01-10',days:[0,1,2,3,4,6],where:'Mellomstasjonen, Østsiden'},
+ {cat:'afterski',title:'Koia afterski',time:'12:00–22:00',t:'15:30',dates:['2027-01-08'],where:'Mellomstasjonen, Østsiden',note:'Fredag öppet till 22.'},
+ {cat:'afterski',title:'Fjøset Afterski',time:'12:00–20:00',t:'15:31',dates:['2027-01-08','2027-01-09'],where:'Tyrihanstunet, Vestsiden',note:'DJ och livemusik. Stängt sön–tor den här veckan.'},
+ {cat:'afterski',title:'Afterski på Varden Restaurant',time:'efter liftstängning',t:'15:32',dates:['2027-01-08','2027-01-09'],where:'Varden, närmast huset',note:'Helgafterski. Exakta tider är inte publicerade.'},
+ {cat:'afterski',title:'Lettvint Café & Bar',time:'till 22:00',t:'15:33',dates:['2027-01-08','2027-01-09'],where:'Vid Oleheisen, Vestsiden',note:'Mest liv på helgerna. Shuffleboard och dart.'}
+];
+const EV_LEDE='Vecka 1 efter nyår är lugn. Liftarna går 09:30–15:30, och flera ställen på Vestsiden har bara öppet fredag och lördag. Välj en dag för att se vad som gäller.';
+const EV_NOTE='<b>Inte bekräftat än:</b> Alpincos evenemangskalender hade inget publicerat för 3–10 januari när detta skrevs (24 nov). Kvällsåkning och skidskolans tider för vecka 1 är inte heller bekräftade. Kolla <a href="https://www.alpinco.com/no/kvitfjell/arrangementer" target="_blank" rel="noopener">Alpincos evenemangssida</a> och <a href="https://kvitfjell.skischool.shop" target="_blank" rel="noopener">skidskolan</a> närmare resan.';
+const MAT_LEDE='Närmast huset ligger Varden Restaurant, vid toppen av Vesleseter Express. Resten finns på Vestsiden runt Skitorget, dit gondolen går, och på Østsiden vid Mellomstasjonen. Under er vecka har flera ställen på Vestsiden bara öppet fredag och lördag.';
+const SOURCES={mat:'Uppgifterna hämtades 24 nov 2026 från <a href="https://www.alpinco.com/no/kvitfjell" target="_blank" rel="noopener">Alpinco</a>, <a href="https://www.tyrihanstunet.no/apningstider/" target="_blank" rel="noopener">Tyrihanstunet</a>, <a href="https://www.vardenrestaurant.com" target="_blank" rel="noopener">Varden Restaurant</a>, <a href="https://gudbrandsgard.no/servering/" target="_blank" rel="noopener">Gudbrandsgard</a>, <a href="https://www.koia.no" target="_blank" rel="noopener">Koia</a> och <a href="https://lettvint-bar.no" target="_blank" rel="noopener">Lettvint</a>. Kolla öppettiderna innan ni går.',
+ events:'Källor: <a href="https://www.alpinco.com/no/kvitfjell/apningstider" target="_blank" rel="noopener">Alpinco öppettider</a>, <a href="https://www.alpinco.com/en/kvitfjell/night-skiing" target="_blank" rel="noopener">kvällsåkning</a>, <a href="https://kvitfjell.skischool.shop/priser-informasjon/" target="_blank" rel="noopener">skidskolans priser</a> och restaurangernas egna sidor. Sol upp och ner är beräknade för huset.'};
+
+</script>
+<script>
+/* ================= APP SHELL ================= */
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+const VIEWS=['huset','pistkarta','3d','mat','events'];
+let dataPromise=null; const getData=()=>dataPromise||(dataPromise=fetch('data.json').then(r=>r.json()));
+const inited={};
+function show(v){
+  if(!VIEWS.includes(v))v='huset';
+  $$('.view').forEach(s=>s.hidden=s.dataset.view!==v);
+  $$('.tab').forEach(t=>t.setAttribute('aria-selected',t.dataset.go===v));
+  if(!inited[v]){inited[v]=true;({pistkarta:initPistmap,'3d':init3D,mat:initMat,events:initEvents})[v]?.();}
+  window.dispatchEvent(new Event('resize'));
+}
+$$('.tab').forEach(t=>t.addEventListener('click',()=>{if(location.hash!=='#'+t.dataset.go)location.hash=t.dataset.go;else show(t.dataset.go);}));
+addEventListener('hashchange',()=>show(location.hash.slice(1)));
+
+/* countdown */
+(function(){
+  const d0=new Date(TRIP.start+'T00:00:00'),d1=new Date(TRIP.end+'T23:59:59'),now=new Date();
+  const days=Math.ceil((d0-now)/864e5);let t;
+  if(now<d0)t=days===1?'I morgon!':days+' dagar kvar';
+  else if(now<=d1)t='Dag '+(Math.floor((now-d0)/864e5)+1)+' av 8';
+  else t='Tack för i år';
+  $('#count').textContent=t;$('#count2').textContent=t+' · ';
+})();
+
+/* install sheet */
+$('#instBtn').onclick=()=>{$('#install').hidden=false;$('#instClose').focus();};
+$('#instClose').onclick=()=>$('#install').hidden=true;
+$('#install').addEventListener('click',e=>{if(e.target.id==='install')e.currentTarget.hidden=true;});
+
+/* copy address */
+$('#copyAddr').onclick=async e=>{const b=e.currentTarget;try{await navigator.clipboard.writeText($('#addrTxt').textContent);b.textContent='Kopierad';}catch(err){const r=document.createRange();r.selectNodeContents($('#addrTxt'));const s=getSelection();s.removeAllRanges();s.addRange(r);b.textContent='Markerad, kopiera själv';}setTimeout(()=>b.textContent='Kopiera adress',2200);};
+
+/* ================= HUSET ================= */
+(function(){
+  const g=$('#gallery');
+  PHOTOS.forEach(([f,cap],i)=>{const b=document.createElement('button');b.type='button';b.setAttribute('aria-label','Visa bild: '+cap);
+    b.innerHTML=`<img loading="lazy" src="house/t_${f}.jpg" alt="${cap}">`;b.onclick=()=>openLb(i);g.appendChild(b);});
+  let cur=0;const lb=$('#lightbox');
+  function openLb(i){cur=(i+PHOTOS.length)%PHOTOS.length;$('#lbImg').src='house/'+PHOTOS[cur][0]+'.jpg';$('#lbImg').alt=PHOTOS[cur][1];$('#lbCap').textContent=`${PHOTOS[cur][1]} · ${cur+1}/${PHOTOS.length}`;lb.hidden=false;}
+  $('#lbPrev').onclick=()=>openLb(cur-1);$('#lbNext').onclick=()=>openLb(cur+1);$('#lbClose').onclick=()=>lb.hidden=true;
+  addEventListener('keydown',e=>{if(!lb.hidden){if(e.key==='ArrowLeft')openLb(cur-1);if(e.key==='ArrowRight')openLb(cur+1);if(e.key==='Escape')lb.hidden=true;}if(e.key==='Escape')$('#install').hidden=true;});
+  let x0=null;lb.addEventListener('touchstart',e=>x0=e.touches[0].clientX,{passive:true});
+  lb.addEventListener('touchend',e=>{if(x0===null)return;const dx=e.changedTouches[0].clientX-x0;if(Math.abs(dx)>50)openLb(cur+(dx<0?1:-1));x0=null;});
+  $('#skiNote').textContent='Gröna Comfortløypa går ca 100 m väster om huset. Därifrån glider ni ner till Vesleseter Express och gondolen över till Vestsiden. Se 3D-kartan för vägen ut och hem.';
+})();
+
+/* geo helper shared by maps */
+let GEO=null;
+function setupGeo(D){const [S,N,W,E]=D.bounds;const C=Math.cos((S+N)/2*Math.PI/180);
+  GEO={loc:(lat,lon)=>[(lon-(W+E)/2)*111320*C,((S+N)/2-lat)*111320],dist:(a,b)=>Math.hypot((a[0]-b[0])*111320,(a[1]-b[1])*111320*C)};}
+const kmTxt=m=>m<950?Math.round(m/10)*10+' m':(m/1000).toLocaleString('sv-SE',{maximumFractionDigits:1})+' km';
+</script>
+
+<script>
+/* ================= PISTKARTA (2D) ================= */
+async function initPistmap(){
+  const D=await getData(); if(!GEO)setupGeo(D);
+  const [SW,SH]=D.size, NS='http://www.w3.org/2000/svg';
+  const host=$('#pm'); const svg=document.createElementNS(NS,'svg'); host.appendChild(svg);
+  const COL={green:'#1d9a52',blue:'#1f6bd0',red:'#d22f48',black:'#16191b',park:'#8a5cc7',free:'#6b5d4d'};
+  const el=(t,a,p)=>{const e=document.createElementNS(NS,t);for(const k in a)e.setAttribute(k,a[k]);(p||svg).appendChild(e);return e;};
+  el('image',{href:'pistmap.jpg',x:-SW/2,y:-SH/2,width:SW,height:SH,preserveAspectRatio:'none'});
+  const gP=el('g',{}),gL=el('g',{}),gH=el('g',{}),gF=el('g',{}),gT=el('g',{});
+  const path=pts=>'M'+pts.map(p=>p[0].toFixed(1)+' '+p[1].toFixed(1)).join('L');
+  const info=$('#pmInfo');let infoT;
+  const say=html=>{info.innerHTML=html;info.hidden=false;clearTimeout(infoT);infoT=setTimeout(()=>info.hidden=true,4200);};
+  const DSV={green:'grön',blue:'blå',red:'röd',black:'svart',park:'park',free:'offpist'};
+  for(const p of D.pistes){
+    const d=path(p.pts);
+    el('path',{d,fill:'none',stroke:'#ffffff','stroke-width':6,'stroke-opacity':.75,'vector-effect':'non-scaling-stroke','stroke-linecap':'round','stroke-linejoin':'round'},gP);
+    el('path',{d,fill:'none',stroke:COL[p.diff]||COL.green,'stroke-width':p.diff==='free'?2:3.2,'stroke-dasharray':p.diff==='free'?'4 4':'','vector-effect':'non-scaling-stroke','stroke-linecap':'round','stroke-linejoin':'round'},gP);
+    const hit=el('path',{d,fill:'none',stroke:'transparent','stroke-width':22,'vector-effect':'non-scaling-stroke',style:'cursor:pointer'},gP);
+    hit.addEventListener('click',()=>say(`<b>${p.name||'Förbindelse'}</b> · ${DSV[p.diff]||''} · ${p.area}`));
+  }
+  const LN={gondola:'Gondol',chair_lift:'Stollift',platter:'Knapplift','t-bar':'Ankarlift',drag_lift:'Släplift',magic_carpet:'Rullband'};
+  for(const l of D.lifts){
+    const d=path(l.pts);
+    el('path',{d,fill:'none',stroke:'#2a1a10','stroke-width':l.type==='magic_carpet'?2:2.6,'vector-effect':'non-scaling-stroke'},gL);
+    el('path',{d,fill:'none',stroke:'#ffb27a','stroke-width':1,'stroke-dasharray':'3 5','vector-effect':'non-scaling-stroke'},gL);
+    for(const i of (l.st||[0,l.pts.length-1])){const q=l.pts[i];el('circle',{cx:q[0],cy:q[1],r:3.5,fill:'#e2702a',stroke:'#fff','stroke-width':1.5,'vector-effect':'non-scaling-stroke',class:'nss'},gL);}
+    const hit=el('path',{d,fill:'none',stroke:'transparent','stroke-width':20,'vector-effect':'non-scaling-stroke',style:'cursor:pointer'},gL);
+    hit.addEventListener('click',()=>say(`<b>${l.name}</b> · ${LN[l.type]||'lift'} · ${l.z0}→${l.z1} möh`));
+  }
+  // house
+  const [hx,hy]=D.home.p;
+  const homeG=el('g',{transform:`translate(${hx} ${hy})`},gH);
+  // labels (scaled on zoom)
+  const texts=[];
+  const label=(t,x,y,cls,size,minK=Infinity)=>{const e=el('text',{x,y,class:cls,'text-anchor':'middle'},gT);e.textContent=t;texts.push({e,size,minK,cls});return e;};
+  for(const a of D.labels)label(a.t,a.p[0],a.p[1],'area',20);
+  const seen=new Set();
+  for(const l of D.lifts){if(!l.name||l.type==='magic_carpet'||seen.has(l.name))continue;seen.add(l.name);const q=l.pts[Math.floor(l.pts.length/2)];label(l.name,q[0],q[1]-6,'lift',11,9);}
+  const best={};for(const p of D.pistes){if(!p.name)continue;let L=0;for(let i=1;i<p.pts.length;i++)L+=Math.hypot(p.pts[i][0]-p.pts[i-1][0],p.pts[i][1]-p.pts[i-1][1]);if(!best[p.name]||best[p.name].L<L)best[p.name]={L,p};}
+  for(const k in best){const p=best[k].p,q=p.pts[Math.floor(p.pts.length/2)];label(k,q[0],q[1],'pst',10.5,3.2);}
+  // food markers
+  const foodEls=[];
+  for(const r of RESTAURANTS){if(!r.ll)continue;const [x,y]=GEO.loc(...r.ll);const g=el('g',{transform:`translate(${x} ${y})`,style:'cursor:pointer',class:'food'},gF);
+    const c=el('circle',{r:7,fill:'#fff',stroke:'#b23a48','stroke-width':2,'vector-effect':'non-scaling-stroke'},g);
+    const t=el('text',{y:3.5,'text-anchor':'middle',style:'font-size:9px;font-weight:800;fill:#b23a48;stroke:none'},g);t.textContent=r.kind.includes('handla')?'▪':r.kind.includes('afterski')&&!r.kind.includes('lunch')?'♪':'⌂';
+    g.addEventListener('click',e=>{e.stopPropagation();say(`<b>${r.name}</b> · ${r.kind.join(', ')} · <a href="#mat" style="color:inherit">Se Restauranger</a>`);});
+    const lt=label(r.name,x,y-12,'pst',10.5,6);foodEls.push(g,lt);}
+  // viewBox state
+  let vb={x:-SW/2,y:-SH/2,w:SW,h:SH};
+  const sizeOf=()=>host.getBoundingClientRect();
+  function apply(){
+    const r=sizeOf();const asp=r.width/r.height;let {x,y,w,h}=vb;
+    if(w/h>asp){const nh=w/asp;y-=(nh-h)/2;h=nh;}else{const nw=h*asp;x-=(nw-w)/2;w=nw;}
+    svg.setAttribute('viewBox',`${x} ${y} ${w} ${h}`);
+    const k=w/r.width; // metres per pixel
+    for(const T of texts){T.e.setAttribute('font-size',T.size*k);T.e.style.strokeWidth=3*k;T.e.style.display=(k<=T.minK&&(namesOn||T.cls==='area'))?'':'none';}
+    homeG.innerHTML=`<circle r="${16*k}" fill="#b23a48" fill-opacity=".18"/><circle r="${7*k}" fill="#b23a48" stroke="#fff" stroke-width="${2.5*k}"/><text y="${-14*k}" text-anchor="middle" style="font-family:var(--f-display);font-weight:800;font-size:${13*k}px;fill:#b23a48;paint-order:stroke;stroke:#fff;stroke-width:${3.5*k}px">Varden Chalet 21</text>`;
+    for(const g of gF.children){const t=g.getAttribute('transform').match(/translate\(([-\d.]+) ([-\d.]+)\)/);g.setAttribute('transform',`translate(${t[1]} ${t[2]}) scale(${k})`);}
+    gF.style.display=foodOn?'':'none';
+    for(const e of foodEls)if(e.tagName==='text')e.style.display=foodOn&&k<=6&&namesOn?'':'none';
+  }
+  let namesOn=true,foodOn=true;
+  function zoomAt(f,cx,cy){const r=sizeOf();const asp=r.width/r.height;let {x,y,w,h}=vb;if(w/h>asp){const nh=w/asp;y-=(nh-h)/2;h=nh;}else{const nw=h*asp;x-=(nw-w)/2;w=nw;}
+    const px=x+(cx/r.width)*w,py=y+(cy/r.height)*h;let nw=Math.min(Math.max(w*f,250),SW*1.4),nh=nw*h/w;
+    vb={x:px-(cx/r.width)*nw,y:py-(cy/r.height)*nh,w:nw,h:nh};apply();}
+  function fit(cx,cy,w){const r=sizeOf();const h=w*r.height/r.width;vb={x:cx-w/2,y:cy-h/2,w,h};apply();}
+  // pointer pan / pinch
+  const ptrs=new Map();let last=null;
+  host.addEventListener('pointerdown',e=>{host.setPointerCapture(e.pointerId);ptrs.set(e.pointerId,{x:e.clientX,y:e.clientY});last=null;});
+  host.addEventListener('pointermove',e=>{if(!ptrs.has(e.pointerId))return;const prev=ptrs.get(e.pointerId);ptrs.set(e.pointerId,{x:e.clientX,y:e.clientY});
+    const r=sizeOf();const vbn=svg.viewBox.baseVal;const k=vbn.width/r.width;
+    if(ptrs.size===1){vb.x-=(e.clientX-prev.x)*k;vb.y-=(e.clientY-prev.y)*k;apply();}
+    else if(ptrs.size===2){const [a,b]=[...ptrs.values()];const d=Math.hypot(a.x-b.x,a.y-b.y);const c={x:(a.x+b.x)/2-r.left,y:(a.y+b.y)/2-r.top};if(last)zoomAt(last/d,c.x,c.y);last=d;}});
+  const end=e=>{ptrs.delete(e.pointerId);last=null;};host.addEventListener('pointerup',end);host.addEventListener('pointercancel',end);
+  host.addEventListener('wheel',e=>{e.preventDefault();const r=sizeOf();zoomAt(Math.exp(e.deltaY*0.0015),e.clientX-r.left,e.clientY-r.top);},{passive:false});
+  $('#zin').onclick=()=>{const r=sizeOf();zoomAt(0.7,r.width/2,r.height/2);};
+  $('#zout').onclick=()=>{const r=sizeOf();zoomAt(1.4,r.width/2,r.height/2);};
+  $('#pmHome').onclick=()=>fit(hx+300,hy-400,1700);
+  $('#pmAll').onclick=()=>{vb={x:-SW/2,y:-SH/2,w:SW,h:SH};apply();};
+  $('#pmFood').onclick=e=>{foodOn=!foodOn;e.currentTarget.setAttribute('aria-pressed',foodOn);apply();};
+  $('#pmNames').onclick=e=>{namesOn=!namesOn;e.currentTarget.setAttribute('aria-pressed',namesOn);apply();};
+  addEventListener('resize',()=>{if(!$('#v-pistkarta').hidden)apply();});
+  // start framed on the lift system (Varden + Vestsiden + Østsiden)
+  const all=[...D.lifts.flatMap(l=>l.pts),D.home.p];const xs=all.map(p=>p[0]),ys=all.map(p=>p[1]);
+  const bx=[Math.min(...xs),Math.max(...xs)],by=[Math.min(...ys),Math.max(...ys)];
+  vb={x:bx[0]-250,y:by[0]-250,w:bx[1]-bx[0]+500,h:by[1]-by[0]+500};apply();
+  const focus=ll=>{const [x,y]=GEO.loc(...ll);fit(x,y,1400);};
+  addEventListener('pm-focus',e=>focus(e.detail));
+  if(window.__pmFocus){focus(window.__pmFocus);window.__pmFocus=null;}
+}
+</script>
+
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}</script>
+<script>
+/* ================= 3D (lazy) ================= */
+function init3D(){import('three').then(T=>import('three/addons/controls/OrbitControls.js').then(O=>start3D(T,O.OrbitControls)));}
+async function start3D(THREE,OrbitControls){
+const css=n=>getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+const DIFF={green:'#1d9a52',blue:'#1f6bd0',red:'#d22f48',black:'#1a1d1f',park:'#8a5cc7',free:'#6b5d4d'};
+const LIFTC='#e2702a';
+const LIFT_NAMES={gondola:'Gondol',chair_lift:'Stollift',platter:'Knapplift','t-bar':'Ankarlift',drag_lift:'Släplift',magic_carpet:'Rullband'};
+const DIFF_SV={green:'grön',blue:'blå',red:'röd',black:'svart'};
+const km=m=>m>=1000?(m/1000).toLocaleString('sv-SE',{maximumFractionDigits:1})+' km':m+' m';
+const D=await getData(); if(!GEO)setupGeo(D);
+const [GW,GH]=D.grid,[SW,SH]=D.size;
+const H=Float32Array.from(D.h,v=>v/10);const EX=1.5;
+const host=$('#scene');
+const renderer=new THREE.WebGLRenderer({antialias:true,alpha:true});
+renderer.setPixelRatio(Math.min(devicePixelRatio,2));renderer.outputColorSpace=THREE.SRGBColorSpace;host.appendChild(renderer.domElement);
+const scene=new THREE.Scene();const camera=new THREE.PerspectiveCamera(42,1,5,40000);
+const controls=new OrbitControls(camera,renderer.domElement);controls.enableDamping=true;controls.dampingFactor=.08;
+controls.maxPolarAngle=Math.PI*0.47;controls.minDistance=150;controls.maxDistance=11000;controls.screenSpacePanning=false;
+scene.add(new THREE.HemisphereLight(0xeef4fa,0x6a7a70,1.45));
+const sun=new THREE.DirectionalLight(0xfff3e4,2.4);sun.position.set(-2600,1700,2600);scene.add(sun);
+scene.fog=new THREE.Fog(new THREE.Color('#f3ece4'),8000,20000);
+function hAt(x,z){let c=(x+SW/2)/SW*(GW-1),r=(z+SH/2)/SH*(GH-1);c=Math.min(Math.max(c,0),GW-1.001);r=Math.min(Math.max(r,0),GH-1.001);const c0=c|0,r0=r|0,fc=c-c0,fr=r-r0,i=r0*GW+c0;return H[i]*(1-fc)*(1-fr)+H[i+1]*fc*(1-fr)+H[i+GW]*(1-fc)*fr+H[i+GW+1]*fc*fr;}
+const yAt=(x,z)=>hAt(x,z)*EX;
+const geo=new THREE.PlaneGeometry(SW,SH,GW-1,GH-1);geo.rotateX(-Math.PI/2);
+{const p=geo.attributes.position;for(let i=0;i<p.count;i++)p.setY(i,H[i]*EX);geo.computeVertexNormals();}
+const loader=new THREE.TextureLoader();const an=renderer.capabilities.getMaxAnisotropy();
+const tex={winter:loader.load('winter.jpg',t=>{t.colorSpace=THREE.SRGBColorSpace;t.anisotropy=an;}),photo:loader.load('summer.jpg',t=>{t.colorSpace=THREE.SRGBColorSpace;t.anisotropy=an;})};
+const tmat=new THREE.MeshStandardMaterial({map:tex.winter,roughness:.95});scene.add(new THREE.Mesh(geo,tmat));
+// skirt
+{const pos=[],idx=[],edge=[];for(let c=0;c<GW;c++)edge.push([c,0]);for(let r=1;r<GH;r++)edge.push([GW-1,r]);for(let c=GW-2;c>=0;c--)edge.push([c,GH-1]);for(let r=GH-2;r>0;r--)edge.push([0,r]);edge.push([0,0]);
+ edge.forEach(([c,r],k)=>{const x=-SW/2+c/(GW-1)*SW,z=-SH/2+r/(GH-1)*SH;pos.push(x,H[r*GW+c]*EX,z,x,-80,z);if(k){const a=(k-1)*2;idx.push(a,a+1,a+2,a+1,a+3,a+2);}});
+ const g=new THREE.BufferGeometry();g.setAttribute('position',new THREE.Float32BufferAttribute(pos,3));g.setIndex(idx);g.computeVertexNormals();scene.add(new THREE.Mesh(g,new THREE.MeshStandardMaterial({color:0x6f7d76,roughness:1,side:THREE.DoubleSide})));}
+function resample(pts,step=7){const out=[];for(let i=0;i<pts.length-1;i++){const[x0,z0]=pts[i],[x1,z1]=pts[i+1];const L=Math.hypot(x1-x0,z1-z0),n=Math.max(1,Math.ceil(L/step));for(let k=0;k<n;k++){const t=k/n;out.push([x0+(x1-x0)*t,z0+(z1-z0)*t]);}}out.push(pts[pts.length-1]);return out;}
+const drape=(pts,lift=3,step=7)=>resample(pts,step).map(([x,z])=>new THREE.Vector3(x,yAt(x,z)+lift,z));
+function ribbon(v3,width,color,opacity=1){if(v3.length<2)return null;const pos=[],idx=[];for(let i=0;i<v3.length;i++){const a=v3[Math.max(0,i-1)],b=v3[Math.min(v3.length-1,i+1)];const dx=b.x-a.x,dz=b.z-a.z,l=Math.hypot(dx,dz)||1,nx=-dz/l*width/2,nz=dx/l*width/2,p=v3[i];pos.push(p.x+nx,p.y,p.z+nz,p.x-nx,p.y,p.z-nz);if(i){const k=(i-1)*2;idx.push(k,k+2,k+1,k+1,k+2,k+3);}}
+ const g=new THREE.BufferGeometry();g.setAttribute('position',new THREE.Float32BufferAttribute(pos,3));g.setIndex(idx);return new THREE.Mesh(g,new THREE.MeshBasicMaterial({color,transparent:opacity<1,opacity,side:THREE.DoubleSide,depthWrite:opacity>=1,polygonOffset:true,polygonOffsetFactor:-2,polygonOffsetUnits:-2}));}
+function liftCurve(pts){const out=[];for(let s=0;s<pts.length-1;s++){const a=pts[s],b=pts[s+1],L=Math.hypot(b[0]-a[0],b[1]-a[1]),n=Math.max(2,Math.ceil(L/20)),ya=yAt(a[0],a[1])+14,yb=yAt(b[0],b[1])+14;for(let i=s?1:0;i<=n;i++){const t=i/n,x=a[0]+(b[0]-a[0])*t,z=a[1]+(b[1]-a[1])*t;out.push(new THREE.Vector3(x,Math.max(ya+(yb-ya)*t-6*Math.sin(Math.PI*t),yAt(x,z)+8),z));}}return out;}
+const liftMid=p=>p.length<=3?[(p[0][0]+p[p.length-1][0])/2,(p[0][1]+p[p.length-1][1])/2]:p[Math.floor(p.length*0.45)];
+// roads
+{const m=new THREE.LineBasicMaterial({color:0x8a7a68,transparent:true,opacity:.6});for(const r of D.roads)scene.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(drape(r.pts,1.2,14)),m));}
+// pistes
+for(const p of D.pistes){const m=ribbon(drape(p.pts,2.2),p.diff==='black'?9:11,DIFF[p.diff]||DIFF.green,.85);if(m)scene.add(m);}
+// lifts
+{const cable=new THREE.MeshBasicMaterial({color:LIFTC}),stMat=new THREE.MeshStandardMaterial({color:0x2b3330,roughness:.7});
+ for(const l of D.lifts){if(l.type==='magic_carpet')continue;const v=liftCurve(l.pts);scene.add(new THREE.Mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3(v),Math.min(300,v.length*2),l.type==='gondola'?4:2.8,5,false),cable));
+  for(const i of (l.st||[0,l.pts.length-1])){const e=l.pts[i];const s=new THREE.Mesh(new THREE.BoxGeometry(22,16,22),stMat);s.position.set(e[0],yAt(e[0],e[1])+8,e[1]);scene.add(s);}}}
+// cabins (instanced)
+{const box=new THREE.BoxGeometry(11,6,9);box.translate(0,3,0);const inst=new THREE.InstancedMesh(box,new THREE.MeshStandardMaterial({color:0x5e4535,roughness:.85}),D.houses.length);const m=new THREE.Matrix4(),q=new THREE.Quaternion(),s=new THREE.Vector3(1,1,1),p=new THREE.Vector3();
+ D.houses.forEach((h,i)=>{q.setFromAxisAngle(new THREE.Vector3(0,1,0),(i*1.7)%3);p.set(h[0],yAt(h[0],h[1]),h[1]);m.compose(p,q,s);inst.setMatrixAt(i,m);});scene.add(inst);}
+// home pin
+const [hx,hz]=D.home.p;const homeObj=new THREE.Group();
+{const pole=new THREE.Mesh(new THREE.CylinderGeometry(1.6,1.6,60,8),new THREE.MeshBasicMaterial({color:0xb23a48}));pole.position.y=30;
+ const ball=new THREE.Mesh(new THREE.SphereGeometry(8,20,16),new THREE.MeshStandardMaterial({color:0xb23a48,emissive:0xb23a48,emissiveIntensity:.5}));ball.position.y=62;
+ const ring=new THREE.Mesh(new THREE.RingGeometry(14,18,48),new THREE.MeshBasicMaterial({color:0xb23a48,transparent:true,opacity:.8,side:THREE.DoubleSide}));ring.rotation.x=-Math.PI/2;ring.position.y=2;
+ homeObj.add(pole,ball,ring);homeObj.userData.ring=ring;homeObj.position.set(hx,yAt(hx,hz),hz);scene.add(homeObj);}
+// labels
+const labelsEl=$('#labels');const labels=[];
+function addLabel(text,x,z,cls,lift=0,html){const el=document.createElement('div');el.className='lbl '+cls;if(html)el.innerHTML=html;else el.textContent=text;labelsEl.appendChild(el);const L={el,x,z,lift,visible:true};labels.push(L);return L;}
+for(const l of D.labels)addLabel(l.t,l.p[0],l.p[1],'area',160);
+addLabel('',hx,hz,'home',78,'Varden Chalet 21<small>Ert hus · '+D.home.z+' möh</small>');
+{const seen=new Set();for(const l of D.lifts){if(l.type==='magic_carpet'||!l.name||seen.has(l.name))continue;seen.add(l.name);if(!/Express|Gondol/.test(l.name))continue;const q=liftMid(l.pts);addLabel(l.name,q[0],q[1],'lift',30);}}
+for(const r of RESTAURANTS){if(!r.ll||!r.show3d)continue;const [x,z]=GEO.loc(...r.ll);addLabel(r.name,x,z,'food',22);}
+const v3=new THREE.Vector3();
+function placeLabels(){const w=host.clientWidth,h=host.clientHeight;for(const L of labels){if(!L.visible){L.el.hidden=true;continue;}v3.set(L.x,yAt(L.x,L.z)+L.lift,L.z).project(camera);const off=v3.z>1||Math.abs(v3.x)>1.2||Math.abs(v3.y)>1.2;L.el.hidden=off;if(off)continue;L.el.style.transform=`translate(${(v3.x*.5+.5)*w}px,${(-v3.y*.5+.5)*h}px) translate(-50%,-100%)`;}}
+// routes
+let current=null,anim=null,legLabels=[];const routeGroup=new THREE.Group();scene.add(routeGroup);
+const skier=new THREE.Mesh(new THREE.SphereGeometry(9,20,14),new THREE.MeshStandardMaterial({color:0xffffff,emissive:0xb23a48,emissiveIntensity:.9}));skier.visible=false;scene.add(skier);
+const pretty=n=>n==='förbindelse'?'Förbindelse':n==='skejt'?'Skejta/gå':n;
+function drawRoute(r){routeGroup.clear();legLabels.forEach(L=>{L.el.remove();labels.splice(labels.indexOf(L),1);});legLabels=[];const path=[];
+ r.legs.forEach((l,i)=>{const v=l.kind==='lift'?liftCurve(l.pts.length>3?[l.pts[0],l.pts[l.pts.length-1]]:l.pts):drape(l.pts,5,5);if(v.length<2)return;
+  if(l.kind!=='lift'){const halo=ribbon(v.map(p=>p.clone().add(new THREE.Vector3(0,.3,0))),30,'#ffffff',.9);if(halo)routeGroup.add(halo);const rb=ribbon(v.map(p=>p.clone().add(new THREE.Vector3(0,.8,0))),l.kind==='walk'?12:20,l.kind==='walk'?'#ffffff':DIFF[l.diff]||DIFF.green,1);if(rb)routeGroup.add(rb);}
+  else routeGroup.add(new THREE.Mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3(v),Math.min(300,v.length*2),9,8,false),new THREE.MeshBasicMaterial({color:LIFTC})));
+  v.forEach(p=>path.push(p));
+  if(l.len>150&&l.kind!=='walk'){const q=l.kind==='lift'?liftMid(l.pts):l.pts[Math.floor(l.pts.length/2)];legLabels.push(addLabel(`${i+1} · ${pretty(l.name)}`,q[0],q[1],'leg',l.kind==='lift'?40:16));}});
+ r._path=path;}
+let fly=null;const ease=t=>t<.5?2*t*t:1-Math.pow(-2*t+2,2)/2;
+function flyTo(target,dist,az=0.6,polar=0.95){const from={t:controls.target.clone(),p:camera.position.clone()};const to={t:target.clone(),p:new THREE.Vector3().setFromSpherical(new THREE.Spherical(dist,polar,az)).add(target)};
+ if(matchMedia('(prefers-reduced-motion: reduce)').matches){controls.target.copy(to.t);camera.position.copy(to.p);return;}fly={from,to,t0:performance.now(),dur:1400};}
+function frameRoute(r){const b=new THREE.Box3();r._path.forEach(p=>b.expandByPoint(p));const c=b.getCenter(new THREE.Vector3()),s=b.getSize(new THREE.Vector3());flyTo(c,Math.max(s.x,s.z,700)*1.9*Math.max(1,1.1/camera.aspect),r.dir==='hem'?2.6:0.5,0.9);}
+function playRoute(r){if(!r._path?.length)return;const P=r._path,cum=[0];for(let i=1;i<P.length;i++)cum.push(cum[i-1]+P[i].distanceTo(P[i-1]));anim={P,cum,total:cum[cum.length-1],dur:Math.min(26,Math.max(9,r.min*1.2))*1000,t0:performance.now()};skier.visible=true;}
+const stepsHTML=r=>r.legs.map(l=>{const dot=l.kind==='lift'?'d-lift':l.kind==='walk'?'d-walk':'d-'+(l.diff||'green');const kind=l.kind==='lift'?LIFT_NAMES[l.diff]||'Lift':l.kind==='walk'?'till fots':DIFF_SV[l.diff]||'';return `<li><div><span class="dot ${dot}"></span><span class="nm">${pretty(l.name)}</span> <span class="dt">${kind} · ${km(l.len)} · ${l.z0}→${l.z1} möh</span></div></li>`;}).join('');
+const barHTML=r=>{const tot=r.legs.reduce((a,l)=>a+Math.max(l.t,6),0);return r.legs.map(l=>`<i style="flex:${Math.max(l.t,6)/tot};background:${l.kind==='walk'?'var(--muted)':l.kind==='lift'?'var(--lift)':`var(--${l.diff||'green'})`}"></i>`).join('');};
+const btns={};
+for(const r of D.routes){const b=document.createElement('button');b.className='route';b.setAttribute('aria-pressed','false');b.innerHTML=`<span class="t">${r.title}</span><span class="m">≈${r.min} min</span><span class="s">${r.sub}</span><span class="bar">${barHTML(r)}</span>`;b.addEventListener('click',()=>select(r.id));$(r.dir==='ut'?'#g-ut':'#g-hem').appendChild(b);btns[r.id]=b;}
+function select(id){const r=D.routes.find(x=>x.id===id);if(current&&current.id===id)return;for(const k in btns){const b=btns[k];b.setAttribute('aria-pressed',k===id);b.querySelector('.steps')?.remove();b.querySelector('.play')?.remove();}
+ current=r;drawRoute(r);frameRoute(r);anim=null;skier.visible=false;const b=btns[id];const ol=document.createElement('ol');ol.className='steps';ol.innerHTML=stepsHTML(r);b.appendChild(ol);
+ const pl=document.createElement('span');pl.className='btn pri play';pl.textContent='▶ Åk rutten';pl.setAttribute('role','button');pl.tabIndex=0;pl.addEventListener('click',e=>{e.stopPropagation();playRoute(r);});pl.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();e.stopPropagation();playRoute(r);}});b.appendChild(pl);}
+$('#routeIntro').textContent='Huset ligger mitt i Varden på ca '+D.home.z+' möh. Gröna Comfortløypa passerar strax väster om huset, både ut och hem.';
+function setMode(m){tmat.map=tex[m];tmat.needsUpdate=true;$('#bWinter').setAttribute('aria-pressed',m==='winter');$('#bPhoto').setAttribute('aria-pressed',m==='photo');}
+$('#bWinter').onclick=()=>setMode('winter');$('#bPhoto').onclick=()=>setMode('photo');
+const homeV=()=>new THREE.Vector3(hx,yAt(hx,hz),hz);
+$('#bHome3').onclick=()=>flyTo(homeV(),1100,0.3,0.9);
+$('#bAll3').onclick=()=>flyTo(new THREE.Vector3(200,yAt(200,-300)*.6,-300),7200,0.35,1.0);
+$('#sheetToggle').onclick=e=>{const c=$('#panel').classList.toggle('collapsed');e.currentTarget.textContent=c?'Visa rutter':'Dölj';e.currentTarget.setAttribute('aria-expanded',!c);};
+function resize(){const w=host.clientWidth,h=host.clientHeight;if(!w||!h)return;renderer.setSize(w,h,false);const p=w>720?Math.min(360,w-24)+12:0;camera.aspect=(w+p)/h;if(p)camera.setViewOffset(w+p,h,0,0,w,h);else camera.clearViewOffset();camera.updateProjectionMatrix();}
+addEventListener('resize',resize);resize();
+{const hv=homeV();controls.target.set(hv.x+700,hv.y+40,hv.z-900);camera.position.set(hv.x-1300,hv.y+1700,hv.z+2300);}
+select('ut-vesleseter');
+if(innerWidth<=720){$('#panel').classList.add('collapsed');$('#sheetToggle').textContent='Visa rutter';$('#sheetToggle').setAttribute('aria-expanded','false');}
+$('#loading3d').hidden=true;
+function tick(now){
+ if(!$('#v-3d').hidden){
+  if(fly){const t=Math.min(1,(now-fly.t0)/fly.dur),k=ease(t);controls.target.lerpVectors(fly.from.t,fly.to.t,k);camera.position.lerpVectors(fly.from.p,fly.to.p,k);if(t>=1)fly=null;}
+  if(anim){const t=Math.min(1,(now-anim.t0)/anim.dur),s=t*anim.total;let i=1;while(i<anim.cum.length-1&&anim.cum[i]<s)i++;const a=anim.P[i-1],b=anim.P[i],f=(s-anim.cum[i-1])/Math.max(1e-6,anim.cum[i]-anim.cum[i-1]);skier.position.lerpVectors(a,b,Math.min(1,Math.max(0,f))).y+=6;
+   if(!fly){const d=skier.position.clone().sub(controls.target).multiplyScalar(.04);controls.target.add(d);camera.position.add(d);}if(t>=1){anim=null;setTimeout(()=>{if(!anim)skier.visible=false;},1500);}}
+  const s=1+((now/900)%1)*1.6;homeObj.userData.ring.scale.set(s,s,s);homeObj.userData.ring.material.opacity=.85*(1-((now/900)%1));
+  controls.update();renderer.render(scene,camera);placeLabels();}
+ requestAnimationFrame(tick);}
+requestAnimationFrame(tick);
+}
+</script>
+
+<script>
+/* ================= RESTAURANGER ================= */
+function initMat(){
+  const kinds=[['alla','Alla'],['lunch','Lunch'],['middag','Middag'],['cafe','Café'],['afterski','Afterski'],['handla','Handla']];
+  const sides=[...new Set(RESTAURANTS.map(r=>r.side))];
+  let fk='alla',fs='alla';
+  const fbox=$('#matFilters');
+  const mk=(lab,on,cb)=>{const b=document.createElement('button');b.type='button';b.className='fbtn';b.textContent=lab;b.setAttribute('aria-pressed',on);b.onclick=cb;fbox.appendChild(b);return b;};
+  const kb=kinds.map(([k,l])=>mk(l,k===fk,()=>{fk=k;kb.forEach((b,i)=>b.setAttribute('aria-pressed',kinds[i][0]===k));render();}));
+  const sp=document.createElement('span');sp.style.width='10px';fbox.appendChild(sp);
+  const sb=['alla',...sides].map(s=>mk(s==='alla'?'Alla områden':s,s===fs,()=>{fs=s;sb.forEach((b,i)=>b.setAttribute('aria-pressed',['alla',...sides][i]===s));render();}));
+  const dist=r=>r.ll?GEO_dist(r.ll,HOUSE_LL):null;
+  function render(){
+    const list=RESTAURANTS.filter(r=>(fk==='alla'||r.kind.includes(fk))&&(fs==='alla'||r.side===fs)).sort((a,b)=>(dist(a)??9e9)-(dist(b)??9e9));
+    $('#rgrid').innerHTML=list.map(r=>{const d=dist(r);return `<article class="rcard"><header><h3>${r.name}</h3>${d!=null?`<span class="dist">${kmTxt(d)} fr. huset</span>`:''}</header>
+      <div class="tags">${r.kind.map(k=>`<span class="tag ${k}">${({lunch:'Lunch',middag:'Middag',cafe:'Café',afterski:'Afterski',bar:'Bar',handla:'Matbutik'})[k]||k}</span>`).join('')}<span class="tag side">${r.side}</span>${r.skiin?'<span class="tag side">Ski in</span>':''}</div>
+      <p>${r.desc}</p>${r.hours?`<div class="hrs">${r.hours}</div>`:''}
+      ${r.book?`<p class="note" style="margin:0">${r.book}</p>`:''}
+      <div class="links">${r.url?`<a class="btn" href="${r.url}" target="_blank" rel="noopener">Hemsida ↗</a>`:''}${r.menu?`<a class="btn" href="${r.menu}" target="_blank" rel="noopener">Meny ↗</a>`:''}${r.ll?`<a class="btn" href="#pistkarta" data-ll="${r.ll}">Visa på kartan</a>`:''}${r.phone?`<span class="phone btn" style="cursor:text">${r.phone}</span>`:''}</div></article>`;}).join('')||'<p class="muted">Inget matchar filtret.</p>';
+  }
+  render();
+  if(!RESTAURANTS.length)$('#rgrid').innerHTML='<p class="muted">Restaurangerna läggs in inom kort.</p>';
+  $('#matLede').textContent=MAT_LEDE;$('#matSrc').innerHTML=SOURCES.mat;
+}
+function GEO_dist(a,b){const C=Math.cos(61.45*Math.PI/180);return Math.hypot((a[0]-b[0])*111320,(a[1]-b[1])*111320*C);}
+
+/* ================= EVENTS ================= */
+function initEvents(){
+  const d0=new Date(TRIP.start+'T12:00:00');const days=[];for(let i=0;i<8;i++){const d=new Date(d0);d.setDate(d.getDate()+i);days.push(d);}
+  const iso=d=>d.toISOString().slice(0,10);const today=iso(new Date());
+  const WD=['sön','mån','tis','ons','tor','fre','lör'];
+  let sel=days.findIndex(d=>iso(d)===today);if(sel<0)sel=0;let cat='alla';
+  const box=$('#days');
+  const bs=days.map((d,i)=>{const b=document.createElement('button');b.type='button';b.className='day'+(iso(d)===today?' today':'');b.innerHTML=`<span>${WD[d.getDay()]}</span><b>${d.getDate()}</b>`;b.setAttribute('aria-pressed',i===sel);b.onclick=()=>{sel=i;bs.forEach((x,j)=>x.setAttribute('aria-pressed',j===i));render();};box.appendChild(b);return b;});
+  const cats=[['alla','Allt'],['lift','Liftar'],['skiskola','Skidskola'],['afterski','Afterski'],['event','Händelser'],['mat','Mat']];
+  const fb=$('#evFilters');const cb=cats.map(([k,l])=>{const b=document.createElement('button');b.type='button';b.className='fbtn';b.textContent=l;b.setAttribute('aria-pressed',k===cat);b.onclick=()=>{cat=k;cb.forEach((x,i)=>x.setAttribute('aria-pressed',cats[i][0]===k));render();};fb.appendChild(b);return b;});
+  const CATSV={lift:'Liftar',skiskola:'Skidskola',afterski:'Afterski',event:'Händelse',mat:'Mat'};
+  const applies=(e,d)=>{const s=iso(d);if(e.dates)return e.dates.includes(s);if(e.from&&s<e.from)return false;if(e.to&&s>e.to)return false;return !e.days||e.days.includes(d.getDay());};
+  function render(){
+    const d=days[sel];const sun=sunTimes(d,HOUSE_LL[0],HOUSE_LL[1]);
+    $('#daysum').innerHTML=`<h2 style="margin-right:6px">${d.toLocaleDateString('sv-SE',{weekday:'long',day:'numeric',month:'long'})}</h2><span class="chip">Soluppgång ${sun.rise}</span><span class="chip">Solnedgång ${sun.set}</span><span class="chip">${sun.len} dagsljus</span>`;
+    const list=EVENTS.filter(e=>applies(e,d)&&(cat==='alla'||e.cat===cat)).sort((a,b)=>(a.t||'').localeCompare(b.t||''));
+    $('#agenda').innerHTML=list.map(e=>`<div class="ev"><time>${e.time||''}</time><div class="body"><span class="cat cat-${e.cat}">${CATSV[e.cat]}</span><b>${e.title}</b>${e.where?`<small>${e.where}</small>`:''}${e.note?`<small>${e.note}</small>`:''}${e.url?`<small><a href="${e.url}" target="_blank" rel="noopener">Läs mer ↗</a></small>`:''}</div></div>`).join('')||'<p class="muted" style="padding:12px 0">Inget i den här kategorin den dagen.</p>';
+  }
+  render();
+  $('#evLede').textContent=EV_LEDE;$('#evNote').innerHTML=EV_NOTE||'';$('#evSrc').innerHTML=SOURCES.events;
+}
+// NOAA-style sunrise/sunset (local time, Europe/Oslo = UTC+1 in January)
+function sunTimes(date,lat,lon){
+  const rad=Math.PI/180,dayMs=864e5,J1970=2440588,J2000=2451545;
+  const toJ=d=>d.valueOf()/dayMs-0.5+J1970, fromJ=j=>new Date((j+0.5-J1970)*dayMs);
+  const d=toJ(new Date(Date.UTC(date.getFullYear(),date.getMonth(),date.getDate(),12)))-J2000;
+  const lw=-lon*rad,phi=lat*rad,n=Math.round(d-0.0009-lw/(2*Math.PI));
+  const ds=0.0009+lw/(2*Math.PI)+n,M=rad*(357.5291+0.98560028*ds),Cc=rad*(1.9148*Math.sin(M)+0.02*Math.sin(2*M)+0.0003*Math.sin(3*M));
+  const L=M+Cc+rad*102.9372+Math.PI,dec=Math.asin(Math.sin(rad*23.4397)*Math.sin(L));
+  const Jt=J2000+ds+0.0053*Math.sin(M)-0.0069*Math.sin(2*L);
+  const w=Math.acos((Math.sin(-0.833*rad)-Math.sin(phi)*Math.sin(dec))/(Math.cos(phi)*Math.cos(dec)));
+  const a=0.0009+(w+lw)/(2*Math.PI)+n,Jset=J2000+a+0.0053*Math.sin(M)-0.0069*Math.sin(2*L),Jrise=Jt-(Jset-Jt);
+  const f=j=>{const t=fromJ(j);const m=(t.getUTCHours()+1)*60+t.getUTCMinutes();return String(Math.floor(m/60)).padStart(2,'0')+':'+String(m%60).padStart(2,'0');};
+  const len=(Jset-Jrise)*24;return {rise:f(Jrise),set:f(Jset),len:Math.floor(len)+' h '+Math.round((len%1)*60)+' min'};
+}
+/* "Visa på kartan" from restaurant cards */
+document.addEventListener('click',e=>{const a=e.target.closest('[data-ll]');if(!a)return;e.preventDefault();const ll=a.dataset.ll.split(',').map(Number);location.hash='pistkarta';
+  if(inited.pistkarta)setTimeout(()=>window.dispatchEvent(new CustomEvent('pm-focus',{detail:ll})),60);else window.__pmFocus=ll;});
+
+/* boot */
+show(location.hash.slice(1)||'huset');
+</script>
+
+<script>
+if('serviceWorker' in navigator){addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}));}
+</script>
+</body>
+</html>
