@@ -1,5 +1,5 @@
-// 5M2LC Kvitfjell 27 – offline support. Version 6599a1b97a
-const CACHE='kvit27-6599a1b97a';
+// 5M2LC Kvitfjell 27 – offline support. Version 98c028e569
+const CACHE='kvit27-98c028e569';
 const CORE=["./", "index.html", "manifest.webmanifest", "data.json", "pistmap.jpg", "winter.jpg", "icons/icon-192.png", "icons/apple-touch-icon.png", "house/t_h01.jpg", "house/t_h02.jpg", "house/t_h03.jpg", "house/t_h04.jpg", "house/t_h05.jpg", "house/t_h06.jpg", "house/t_h07.jpg", "house/t_h08.jpg", "house/t_h09.jpg", "house/t_h10.jpg", "house/t_h11.jpg", "house/t_h12.jpg", "house/t_h13.jpg", "house/t_h14.jpg", "house/t_h15.jpg", "house/t_h16.jpg", "house/t_h17.jpg", "house/t_h18.jpg", "house/t_h19.jpg", "house/t_h20.jpg", "house/t_h21.jpg", "house/t_h22.jpg", "house/h11.jpg"];
 self.addEventListener('install',e=>{e.waitUntil(caches.open(CACHE).then(c=>c.addAll(CORE)).then(()=>self.skipWaiting()));});
 self.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(ks=>Promise.all(ks.filter(k=>k!==CACHE).map(k=>caches.delete(k)))).then(()=>self.clients.claim()));});
